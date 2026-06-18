@@ -182,7 +182,7 @@ export default function RevenuePage() {
                 <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400 uppercase hidden md:table-cell">Rating</th>
               </tr>
             </thead>
-            <tbody>
+            <tbo>
               {topDrivers.map((d, i) => (
                 <tr key={d.id} className={`border-b border-gray-50 hover:bg-blue-50/20 ${i % 2 === 0 ? '' : 'bg-gray-50/30'}`}>
                   <td className="py-3 px-5">
@@ -217,7 +217,7 @@ export default function RevenuePage() {
                   </td>
                 </tr>
               ))}
-            </tbody>
+            </tbo>
           </table>
         </div>
       </div>

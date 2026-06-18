@@ -179,7 +179,7 @@ export default function RestaurantsPage() {
                   ))}
                 </tr>
               </thead>
-              <tbody>
+              <tbo>
                 {filtered.length === 0 ? (
                   <tr><td colSpan={7} className="py-16 text-center text-gray-400">
                     <div className="text-4xl mb-2">🏪</div>
@@ -225,7 +225,7 @@ export default function RestaurantsPage() {
                     </td>
                   </tr>
                 ))}
-              </tbody>
+              </tbo>
             </table>
           </div>
         )}

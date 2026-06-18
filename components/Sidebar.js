@@ -9,6 +9,7 @@ const menuItems = [
   { icon: '📊', label: 'Dashboard', href: '/dashboard', exact: true },
   { icon: '📋', label: 'Orders', href: '/dashboard/orders' },
   { icon: '🛵', label: 'Drivers', href: '/dashboard/drivers', badge: 'kyc' },
+  { icon: '📝', label: 'Pendaftaran Driver', href: '/dashboard/driver-applications', badge: 'reg' },
   { icon: '👤', label: 'Passengers', href: '/dashboard/passengers' },
   { icon: '📦', label: 'GoSend', href: '/dashboard/gosend' },
   { icon: '🍔', label: 'GoFood', href: '/dashboard/gofood' },
@@ -21,7 +22,23 @@ const menuItems = [
 
 export default function Sidebar({ onClose, isMobile }) {
   const pathname = usePathname()
-  const [badges, setBadges] = useState({ online: 24, kyc: 7 })
+  const [badges, setBadges] = useState({ online: 24, kyc: 7, reg: 0 })
+
+  useEffect(() => {
+    // Fetch pending registrations count
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null
+    if (!token) return
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://temride-backend-production.up.railway.app'}/api/driver-registration?status=PENDING&limit=1`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(r => r.json())
+      .then(data => {
+        if (data?.stats?.pending !== undefined) {
+          setBadges(prev => ({ ...prev, reg: data.stats.pending }))
+        }
+      })
+      .catch(() => {})
+  }, [])
 
   const isActive = (href, exact) => {
     if (exact) return pathname === href
@@ -87,6 +104,11 @@ export default function Sidebar({ onClose, isMobile }) {
                 {item.badge === 'kyc' && badges.kyc > 0 && (
                   <span className="bg-[#F59E0B] text-white text-xs font-bold px-2 py-0.5 rounded-full min-w-[20px] text-center">
                     {badges.kyc}
+                  </span>
+                )}
+                {item.badge === 'reg' && badges.reg > 0 && (
+                  <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full min-w-[20px] text-center">
+                    {badges.reg}
                   </span>
                 )}
               </Link>

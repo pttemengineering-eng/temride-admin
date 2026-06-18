@@ -166,7 +166,7 @@ export default function VouchersPage() {
                   ))}
                 </tr>
               </thead>
-              <tbody>
+              <tbo>
                 {filtered.length === 0 ? (
                   <tr><td colSpan={9} className="py-16 text-center text-gray-400">
                     <div className="text-4xl mb-2">🎟️</div>
@@ -224,7 +224,7 @@ export default function VouchersPage() {
                     </tr>
                   )
                 })}
-              </tbody>
+              </tbo>
             </table>
           </div>
         )}

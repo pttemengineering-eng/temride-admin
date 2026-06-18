@@ -5,11 +5,11 @@ import { useEffect } from 'react'
 export default function Modal({ open, onClose, title, children, footer, size = 'md' }) {
   useEffect(() => {
     if (open) {
-      document.body.style.overflow = 'hidden'
+      document.bo.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = ''
+      document.bo.style.overflow = ''
     }
-    return () => { document.body.style.overflow = '' }
+    return () => { document.bo.style.overflow = '' }
   }, [open])
 
   if (!open) return null
@@ -39,7 +39,7 @@ export default function Modal({ open, onClose, title, children, footer, size = '
           </button>
         </div>
 
-        {/* Body */}
+        {/* Bo */}
         <div className="flex-1 overflow-y-auto p-6">
           {children}
         </div>

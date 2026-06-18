@@ -33,7 +33,7 @@ export default function OrdersTable({ orders, showPagination = false, onViewDeta
               <th className="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Aksi</th>
             </tr>
           </thead>
-          <tbody>
+          <tbo>
             {orders.map((order, idx) => {
               const s = statusConfig[order.status] || statusConfig.pending
               return (
@@ -85,7 +85,7 @@ export default function OrdersTable({ orders, showPagination = false, onViewDeta
                 </tr>
               )
             })}
-          </tbody>
+          </tbo>
         </table>
       </div>
 

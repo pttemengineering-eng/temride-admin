@@ -1,19 +1,21 @@
-import { Inter } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
-
 export const metadata = {
-  title: 'TemRide Admin Dashboard',
-  description: 'Admin Dashboard for TemRide motorcycle taxi platform',
+  title: 'TemRide Admin — PT Tridaya Elektra Mandiri',
+  description: 'Admin Dashboard TemRide — Platform Ojek & Taksi Listrik Kalimantan',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className={inter.className}>
+      <head>
+        <style>{`
+          * { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        `}</style>
+      </head>
+      <bo>
         {children}
-      </body>
+      </bo>
     </html>
   )
 }

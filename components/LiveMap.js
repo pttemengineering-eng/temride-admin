@@ -108,14 +108,14 @@ export default function LiveMap() {
           const x = ((driver.lng - baseLngMin) / (baseLngMax - baseLngMin)) * 90 + 5
           const y = ((driver.lat - baseLatMin) / (baseLatMax - baseLatMin)) * 90 + 5
           const clampedX = Math.max(5, Math.min(95, x))
-          const clampedY = Math.max(5, Math.min(95, y))
+          const clampe = Math.max(5, Math.min(95, y))
 
           return (
             <button
               key={driver.id}
               onClick={() => setSelectedDriver(selectedDriver?.id === driver.id ? null : driver)}
               className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-transform hover:scale-125 z-10"
-              style={{ left: `${clampedX}%`, top: `${clampedY}%` }}
+              style={{ left: `${clampedX}%`, top: `${clampe}%` }}
             >
               <div className="relative">
                 <div

@@ -57,7 +57,7 @@ export default function DriversTable({ drivers, onApproveKYC, onSuspend, onActiv
               <th className="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Aksi</th>
             </tr>
           </thead>
-          <tbody>
+          <tbo>
             {drivers.map((driver, idx) => {
               const kyc = kycConfig[driver.kycStatus] || kycConfig.pending
               const credit = creditConfig[driver.creditStatus] || creditConfig.good
@@ -140,7 +140,7 @@ export default function DriversTable({ drivers, onApproveKYC, onSuspend, onActiv
                 </tr>
               )
             })}
-          </tbody>
+          </tbo>
         </table>
       </div>
 

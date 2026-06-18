@@ -341,7 +341,7 @@ export default function DriverDetailPage() {
                       <th className="text-left py-2 px-3 text-xs font-semibold text-gray-400 uppercase">Status</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbo>
                     {driver.recentOrders?.map((o, i) => (
                       <tr key={i} className={`border-b border-gray-50 hover:bg-gray-50 ${i % 2 === 0 ? '' : 'bg-gray-50/30'}`}>
                         <td className="py-2.5 px-3">
@@ -363,7 +363,7 @@ export default function DriverDetailPage() {
                         </td>
                       </tr>
                     ))}
-                  </tbody>
+                  </tbo>
                 </table>
               </div>
             </div>

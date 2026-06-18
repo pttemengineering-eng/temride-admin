@@ -56,7 +56,7 @@ export default function DataTable({
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbo>
           {loading ? (
             <tr>
               <td colSpan={columns.length} className="py-16 text-center text-gray-400">
@@ -92,7 +92,7 @@ export default function DataTable({
               </tr>
             ))
           )}
-        </tbody>
+        </tbo>
       </table>
     </div>
   )

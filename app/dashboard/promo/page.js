@@ -238,7 +238,7 @@ export default function PromoPage() {
                 <th className="text-right py-3 px-4 text-xs font-semibold text-gray-400 uppercase">Aksi</th>
               </tr>
             </thead>
-            <tbody>
+            <tbo>
               {promos.map((promo, i) => {
                 const usagePct = Math.round((promo.used / promo.limit) * 100)
                 return (
@@ -299,7 +299,7 @@ export default function PromoPage() {
                   </tr>
                 )
               })}
-            </tbody>
+            </tbo>
           </table>
         </div>
 

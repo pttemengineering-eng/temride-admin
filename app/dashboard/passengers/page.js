@@ -140,7 +140,7 @@ export default function PassengersPage() {
                   <th className="text-left py-3 px-4 text-xs font-semibold text-gray-400 uppercase">Aksi</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbo>
                 {filtered.length === 0 ? (
                   <tr>
                     <td colSpan={7} className="py-16 text-center text-gray-400">
@@ -196,7 +196,7 @@ export default function PassengersPage() {
                     </td>
                   </tr>
                 ))}
-              </tbody>
+              </tbo>
             </table>
           </div>
         )}
