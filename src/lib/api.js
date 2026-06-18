@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.temride.id';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://temride-backend-production.up.railway.app';
 
 const api = axios.create({
   baseURL: API_URL,
@@ -48,7 +48,7 @@ export const logout = () =>
 
 // ── Dashboard ─────────────────────────────────
 export const getDashboardStats = () =>
-  api.get('/api/admin/dashboard/stats');
+  api.get('/api/admin/dashboard-stats');
 
 export const getRevenueChart = (days = 7) =>
   api.get(`/api/admin/dashboard/revenue-chart?days=${days}`);
@@ -108,5 +108,39 @@ export const deletePromo = (id) =>
 
 export const togglePromo = (id, active) =>
   api.patch(`/api/admin/promos/${id}/toggle`, { active });
+
+// ── Helpers (non-auth fetch for stats page) ──
+export const API_BASE = API_URL;
+
+export async function fetchDashboardStats() {
+  try {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('temride_token') : null;
+    const res = await fetch(`${API_URL}/api/admin/dashboard-stats`, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      cache: 'no-store',
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    return json.data || json;
+  } catch (err) {
+    console.error('fetchDashboardStats error:', err);
+    return null;
+  }
+}
+
+export async function checkBackendHealth() {
+  try {
+    const res = await fetch(`${API_URL}/health`, {
+      cache: 'no-store',
+      signal: AbortSignal.timeout(5000),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
 
 export default api;
