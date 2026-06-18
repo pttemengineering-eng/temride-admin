@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import DriversTable from '@/components/DriversTable'
 import { driversAPI } from '@/lib/api'
 import { useSearchParams } from 'next/navigation'
@@ -12,7 +12,7 @@ const TABS = [
   { key: 'suspended', label: 'Suspended' },
 ]
 
-export default function DriversPage() {
+function DriversContent() {
   const searchParams = useSearchParams()
   const initialTab = searchParams.get('tab') || 'all'
   const [activeTab, setActiveTab] = useState(initialTab)
@@ -158,5 +158,20 @@ export default function DriversPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function DriversPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center py-16 text-gray-400">
+        <div className="text-center">
+          <div className="text-3xl mb-2 animate-spin">⟳</div>
+          <p className="text-sm">Memuat halaman driver...</p>
+        </div>
+      </div>
+    }>
+      <DriversContent />
+    </Suspense>
   )
 }

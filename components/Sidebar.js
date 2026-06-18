@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 const menuItems = [
@@ -29,11 +30,18 @@ export default function Sidebar({ onClose, isMobile }) {
       {/* Logo */}
       <div className="px-6 py-5 border-b border-white/10">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-[#F59E0B] rounded-xl flex items-center justify-center text-xl shadow-md flex-shrink-0">
-            🏍️
+          <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">
+            <Image
+              src="/logo.png"
+              alt="TemRide"
+              width={48}
+              height={48}
+              className="object-contain"
+              priority
+            />
           </div>
           <div>
-            <h1 className="text-white font-bold text-lg leading-none">TemRide</h1>
+            <h1 className="text-white font-bold text-xl leading-none">TemRide</h1>
             <p className="text-blue-300 text-xs mt-0.5">Admin Panel</p>
           </div>
           {isMobile && (
