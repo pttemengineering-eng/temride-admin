@@ -6,22 +6,25 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 const menuItems = [
-  { icon: '🏠', label: 'Dashboard', href: '/dashboard', badge: null },
+  { icon: '📊', label: 'Dashboard', href: '/dashboard', exact: true },
+  { icon: '📋', label: 'Orders', href: '/dashboard/orders' },
+  { icon: '🛵', label: 'Drivers', href: '/dashboard/drivers', badge: 'kyc' },
+  { icon: '👤', label: 'Passengers', href: '/dashboard/passengers' },
+  { icon: '📦', label: 'GoSend', href: '/dashboard/gosend' },
+  { icon: '🍔', label: 'GoFood', href: '/dashboard/gofood' },
+  { icon: '🏪', label: 'Restaurants', href: '/dashboard/restaurants' },
+  { icon: '💰', label: 'Revenue', href: '/dashboard/revenue' },
+  { icon: '🎟️', label: 'Vouchers', href: '/dashboard/vouchers' },
   { icon: '🗺️', label: 'Live Map', href: '/dashboard/livemap', badge: 'online' },
-  { icon: '🏍️', label: 'Drivers', href: '/dashboard/drivers', badge: 'kyc' },
-  { icon: '📦', label: 'Orders', href: '/dashboard/orders', badge: null },
-  { icon: '💰', label: 'Revenue', href: '/dashboard/revenue', badge: null },
-  { icon: '⚡', label: 'Vouchers', href: '/dashboard/vouchers', badge: null },
-  { icon: '🎟️', label: 'Promo', href: '/dashboard/promo', badge: null },
-  { icon: '⚙️', label: 'Settings', href: '/dashboard/settings', badge: null },
+  { icon: '⚙️', label: 'Settings', href: '/dashboard/settings' },
 ]
 
 export default function Sidebar({ onClose, isMobile }) {
   const pathname = usePathname()
   const [badges, setBadges] = useState({ online: 24, kyc: 7 })
 
-  const isActive = (href) => {
-    if (href === '/dashboard') return pathname === '/dashboard'
+  const isActive = (href, exact) => {
+    if (exact) return pathname === href
     return pathname.startsWith(href)
   }
 
@@ -60,7 +63,7 @@ export default function Sidebar({ onClose, isMobile }) {
         <p className="text-blue-400 text-xs font-semibold uppercase tracking-wider px-3 mb-3">
           Menu Utama
         </p>
-        <ul className="space-y-1">
+        <ul className="space-y-0.5">
           {menuItems.map((item) => (
             <li key={item.href}>
               <Link
@@ -68,7 +71,7 @@ export default function Sidebar({ onClose, isMobile }) {
                 onClick={isMobile ? onClose : undefined}
                 className={`
                   flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200
-                  ${isActive(item.href)
+                  ${isActive(item.href, item.exact)
                     ? 'bg-white/15 text-white font-semibold shadow-sm'
                     : 'text-blue-200 hover:bg-white/10 hover:text-white'
                   }
@@ -105,7 +108,7 @@ export default function Sidebar({ onClose, isMobile }) {
         </div>
       </nav>
 
-      {/* Version */}
+      {/* Footer */}
       <div className="px-6 py-4 border-t border-white/10">
         <p className="text-blue-400 text-xs text-center">© 2024 TemRide</p>
       </div>
