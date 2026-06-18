@@ -30,7 +30,7 @@ export default function DriverApplicationsPage() {
   const fetchApplications = useCallback(async () => {
     setLoading(true)
     try {
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem('adminToken') || localStorage.getItem('temride_token') || localStorage.getItem('token')
       const params = {}
       if (filters.status)      params.status      = filters.status
       if (filters.city)        params.city        = filters.city
@@ -52,8 +52,7 @@ export default function DriverApplicationsPage() {
     fetchApplications()
   }, [fetchApplications])
 
-  const openDetail = (app) => {
-    setSelected(app)
+  const openDetail = (app) => {    setSelected(app)
     setReviewForm({ status: app.status, notes: app.notes || '' })
     setReviewMsg('')
   }
@@ -63,7 +62,7 @@ export default function DriverApplicationsPage() {
     setSubmitting(true)
     setReviewMsg('')
     try {
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem('adminToken') || localStorage.getItem('temride_token') || localStorage.getItem('token')
       await axios.patch(
         `${API_BASE}/api/driver-registration/${selected.id}/review`,
         { status: reviewForm.status, notes: reviewForm.notes },
@@ -81,7 +80,7 @@ export default function DriverApplicationsPage() {
 
   const quickReview = async (id, status) => {
     try {
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem('adminToken') || localStorage.getItem('temride_token') || localStorage.getItem('token')
       await axios.patch(
         `${API_BASE}/api/driver-registration/${id}/review`,
         { status },
@@ -104,6 +103,21 @@ export default function DriverApplicationsPage() {
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900">📝 Pendaftaran Driver</h1>
         <p className="text-gray-500 text-sm mt-1">Manajemen pendaftaran mitra driver TemRide</p>
+      </div>
+
+      {/* Info box */}
+      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+        <h3 className="font-semibold text-blue-800 mb-2">ℹ️ Tentang Halaman Ini</h3>
+        <p className="text-blue-700 text-sm mb-3">
+          Halaman ini menampilkan pendaftar driver baru dari:
+        </p>
+        <ol className="list-decimal list-inside text-blue-700 text-sm space-y-1">
+          <li>Form online di <strong>temride.id/daftar-driver.html</strong></li>
+          <li>Walk-in di kantor <strong>PT TEM Balikpapan</strong></li>
+        </ol>
+        <p className="text-blue-700 text-sm mt-3">
+          <strong>Alur:</strong> Daftar → Review Admin → <span className="text-green-700 font-semibold">Approved</span> / <span className="text-red-700 font-semibold">Rejected</span> → Notif WA ke calon driver
+        </p>
       </div>
 
       {/* Stats Cards */}
